@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\VendedorController;
+use App\Http\Controllers\CompradorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name("inicio");
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+Route::get('/productos/mostrar', [ProductosController::class, 'mostrar'])->middleware(['auth']);
